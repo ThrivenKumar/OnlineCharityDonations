@@ -1,0 +1,245 @@
+.navbar {
+  width: 100%;
+  height: calc(40px + 2vw);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: sticky;
+  padding: 1vw;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.btn {
+  height: calc(30px + 1vw);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  font-weight: bold;
+  text-decoration: none;
+  color: rgb(22, 29, 111);
+}
+.btn:hover {
+  background-color: rgba(152, 222, 217, 0.5);
+  cursor: pointer;
+}
+.title {
+  width: 100%;
+  height: calc(200px + 15vw);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2vw;
+  color: rgba(152, 222, 217);
+  background-color: rgb(22, 29, 111);
+}
+.titlegrid {
+  box-sizing: border-box;
+  width: 70%;
+  height: calc(200px + 5vw);
+  display: grid;
+  align-items: center;
+  border-radius: 2vw;
+  animation: slide-left 0.5s ease-in-out;
+}
+.titlegrid div {
+  padding: 2vw;
+}
+.titlegrid div h1 {
+  font-size: calc(20px + 2vw);
+  animation: jumpup 0.7s ease-in-out;
+}
+.titlegrid div p {
+  font-size: calc(10px + 1vw);
+  animation: jumpdown 0.7s ease-in-out;
+}
+.title img {
+  width: 50%;
+  height: calc(300px + 10vw);
+}
+.intro {
+  width: 100%;
+  height: calc(300px + 10vw);
+  display: flex;
+  align-items: top;
+}
+.intro img {
+  width: 50%;
+  height: calc(300px + 10vw);
+}
+.intro div {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 2vw;
+  height: 30vw;
+}
+.intro div h3 {
+  color: rgb(22, 29, 111);
+  font-size: calc(20px + 2vw);
+}
+.intro div p {
+  color: rgb(22, 29, 111);
+  font-size: calc(10px + 1vw);
+}
+.authentication {
+  height: calc(200px + 15vw);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: rgb(22, 29, 111);
+}
+.donate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  font-size: calc(50px + 3vw);
+  color: rgba(152, 222, 217);
+}
+.donate img {
+  height: calc(50px + 5vw);
+  width: calc(50px + 5vw);
+}
+.subauthentication {
+  display: block;
+  box-sizing: border-box;
+  padding: 2vw;
+  width: 50%;
+}
+/* .authentication::after {
+  content: "DONATE";
+  position: absolute;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  width: 100%;
+  height: calc(300px + 10vw);
+  font-size: calc(200px);
+} */
+.charitydiv,
+.donordiv {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background: none;
+  transition-duration: 0.4s;
+}
+.charitydiv:hover,
+.donordiv:hover {
+  background-color: rgba(152, 222, 217, 0.4);
+}
+.charitydiv h3 {
+  width: 40%;
+  font-size: calc(15px + 1vw);
+  color: rgba(152, 222, 217);
+}
+.donordiv h3 {
+  width: 40%;
+  font-size: calc(15px + 1vw);
+  color: rgba(152, 222, 217);
+}
+.charitydiv button,
+.donordiv button {
+  box-sizing: border-box;
+  padding: 1vw;
+  color: #161d6f;
+  background-color: rgba(152, 222, 217);
+  border: none;
+  border-radius: 0.2vw;
+  font-size: calc(10px + 1vw);
+}
+.charitydiv button:hover,
+.donordiv button:hover {
+  cursor: pointer;
+}
+.developerprofile {
+  color: rgb(22, 29, 111);
+  height: calc(200px + 15vw);
+}
+.guidename {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1vw);
+  padding: 1vw;
+}
+.guidenamevalue {
+  font-weight: bold;
+}
+.team {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 0.5vw);
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+.teammatescontainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.teammate {
+  width: 25%;
+  padding: 1vw;
+  gap: 1vw;
+  border: 2px solid rgba(152, 222, 217);
+}
+.developerrollno {
+  font-size: calc(7px + 1vw);
+  width: 100%;
+  padding-left: 1vw;
+}
+.developername {
+  width: 100%;
+  padding: 1vw;
+  font-size: calc(10px + 0.5vw);
+  font-weight: bold;
+}
+.developerlink {
+  padding: 1vw;
+  gap: 2vw;
+  display: flex;
+  align-items: center;
+  /* border: 2px solid rgb(22, 29, 111); */
+}
+.developerlink p {
+  font-size: calc(7px + 0.5vw);
+  color: black;
+}
+.developerlink:hover {
+  cursor: pointer;
+}
+.githublogo {
+  height: calc(20px + 1vw);
+}
+@keyframes jumpup {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes jumpdown {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes slide-left {
+  0% {
+    transform: translateX(30%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}

@@ -1,0 +1,136 @@
+.cpgreeting {
+  width: 100%;
+  height: calc(30px + 6vw);
+  padding: 2vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cpevenletters {
+  color: rgb(152, 222, 217);
+}
+.cpgreeting button {
+  outline: none;
+  border: 2px solid rgb(22, 29, 111);
+  background: none;
+  background-color: rgb(22, 29, 111);
+  color: rgb(152, 222, 217);
+  font-size: calc(10px + 0.5vw);
+  height: calc(20px + 1vw);
+  padding-left: 2vw;
+  padding-right: 2vw;
+  transition-duration: 0.2s;
+  font-weight: bold;
+}
+.cpgreeting button:hover {
+  cursor: pointer;
+  color: rgb(22, 29, 111);
+  background: none;
+}
+.cpgreeting p {
+  font-size: calc(20px + 2vw);
+  color: rgb(22, 29, 111);
+}
+.cpmaindiv {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2vw;
+}
+.cpprofile {
+  width: 45%;
+}
+.viewphotos {
+  width: 50%;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.cpdetails {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: calc(50px + 2vw);
+}
+.cpdetails label {
+  color: rgb(22, 29, 111);
+  font-size: calc(10px + 0.5vw);
+  font-weight: bold;
+}
+.cpdetails input {
+  outline: none;
+  border: none;
+  border: 2px solid rgb(22, 29, 111);
+  color: rgb(22, 29, 111);
+  font-size: calc(10px + 0.5vw);
+  padding: 0.5vw;
+  width: 70%;
+}
+.cpdetails input:focus {
+  background-color: rgb(152, 222, 217, 0.4);
+}
+.cpvalue {
+  border: 2px solid rgb(22, 29, 111);
+  color: rgb(22, 29, 111);
+  font-size: calc(10px + 0.5vw);
+  padding: 0.5vw;
+  width: 70%;
+}
+.cpdoneeaddress {
+  width: 100%;
+  display: grid;
+  gap: 1vw;
+}
+.cpemailorphone {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  border: none;
+}
+.cpemailorphone input {
+  width: 100%;
+}
+.cpemailorphone div {
+  width: 90%;
+  border: 2px solid rgb(22, 29, 111);
+  color: rgb(22, 29, 111);
+  font-size: calc(10px + 0.5vw);
+  padding: 0.5vw;
+}
+
+.copyPNG {
+  height: calc(15px + 1vw);
+}
+.cpsaveinfodiv {
+  width: 100%;
+  height: calc(50px + 2vw);
+  display: flex;
+  align-items: center;
+  padding: 2vw;
+  gap: 2vw;
+}
+.cpsavebtn {
+  outline: none;
+  border: 2px solid rgb(22, 29, 111);
+  background-color: rgb(22, 29, 111);
+  height: calc(20px + 1vw);
+  font-size: calc(10px + 0.5vw);
+  padding-left: 1vw;
+  padding-right: 1vw;
+  color: rgb(152, 222, 217);
+  transition-duration: 0.3s;
+  font-weight: bold;
+}
+.cpsavebtn:hover {
+  background: none;
+  color: rgb(22, 29, 111);
+  cursor: pointer;
+}
+.cpcertificate {
+  width: 100%;
+  border-radius: 1vw;
+}

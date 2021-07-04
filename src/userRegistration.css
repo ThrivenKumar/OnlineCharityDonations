@@ -1,0 +1,9 @@
+.urdetails {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  background: url("./images/charityimage10.jpeg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

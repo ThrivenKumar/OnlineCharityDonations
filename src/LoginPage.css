@@ -1,0 +1,77 @@
+.Loginmaindiv {
+  height: 100vh;
+  width: 100%;
+  padding: 2vw;
+  background-image: url("./images/charityimage10.jpeg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+.Loginheader {
+  width: 100%;
+  font-size: calc(30px + 3vw);
+  height: calc(40px + 3vw);
+  color: rgb(22, 29, 111);
+}
+.evenletter {
+  color: rgba(152, 222, 217);
+}
+.Loginsubdiv {
+  width: 50%;
+  position: relative;
+  top: 20%;
+  border: 0.25vw solid rgb(22, 29, 111);
+  display: grid;
+  padding: 2vw;
+  gap: 1vw;
+  background-color: rgb(22, 29, 111, 0.5);
+  box-shadow: 5px 8px 15px 0 rgba(0, 0, 0, 0.3),
+    5px 8px 20px 0 rgba(0, 0, 0, 0.3);
+  animation-name: come-down;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  transform-origin: left;
+}
+.lpinput {
+  height: calc(20px + 2vw);
+  width: 75%;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border: none;
+  outline: none;
+  border: 2px solid rgb(22, 29, 111);
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: calc(10px + 0.5vw);
+}
+.lpinput:focus {
+  background-color: rgba(152, 222, 217, 0.4);
+}
+.lplabel {
+  /* color: rgb(22, 29, 111); */
+  color: white;
+  font-weight: bold;
+  font-size: calc(10px + 0.5vw);
+}
+.lpstatus {
+  color: rgb(252, 214, 0);
+  font-weight: bold;
+}
+.lploginbutton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.lploginbutton button {
+  outline: none;
+  border: none;
+  background-color: rgb(22, 29, 111);
+  /* background-color: rgba(152, 222, 217); */
+  /* color: rgba(152, 222, 217); */
+  color: rgba(152, 222, 217);
+  height: calc(15px + 2vw);
+  padding-left: 2vw;
+  padding-right: 2vw;
+  font-size: calc(10px + 0.5vw);
+  font-weight: bold;
+}
