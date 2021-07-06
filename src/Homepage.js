@@ -2,7 +2,6 @@ import "./Homepage.css";
 import image2 from "./images/charityimage11.jpg";
 import GithubLogo from "./images/GithubLogo.png";
 import LinkedinLogo from "./images/LinkedinLogo.png";
-import GmailLogo from "./images/GmailLogo.png";
 import { Link } from "react-router-dom";
 
 function App() {
@@ -100,7 +99,14 @@ function App() {
           <div className="teammate">
             <div className="developerrollno">11716057</div>
             <div className="developername">Yaswanth Reddy Narapureddy</div>
-            <div className="developerlink">
+            <div
+              className="developerlink"
+              onClick={() => {
+                window.open(
+                  "https://www.linkedin.com/in/yaswanth-reddy-4a24931a7"
+                );
+              }}
+            >
               <img src={LinkedinLogo} alt="linkedin" className="githublogo" />
               <p>Linkedin</p>
             </div>

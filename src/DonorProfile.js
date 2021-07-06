@@ -26,7 +26,7 @@ const DonorProfile = ({ data, setViewProfile }) => {
               <div className="dpprofilevalue">{data.name}</div>
             </div>
             <div className="dpprofileelement">
-              <div className="dpprofilelabel">Address :</div>
+              <div className="dpprofilelabel">Street :</div>
               <div className="dpprofilevalue">{data.addressLine1}</div>
             </div>
             <div className="dpprofileelement">
@@ -42,7 +42,7 @@ const DonorProfile = ({ data, setViewProfile }) => {
               <div className="dpprofilevalue">{data.email}</div>
             </div>
             <div className="dpprofileelement">
-              <div className="dpprofilelabel">Phone No :</div>
+              <div className="dpprofilelabel">Phone :</div>
               <div className="dpprofilevalue">{data.phoneNo}</div>
             </div>
           </div>

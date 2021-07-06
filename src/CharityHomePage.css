@@ -35,7 +35,7 @@
   padding-right: 1vw;
 }
 .chptitleright div:hover {
-  background-color: rgb(22, 29, 111, 0.2);
+  background-color: rgb(22, 29, 111, 0.1);
   cursor: pointer;
 }
 .chpnavbar {
@@ -160,7 +160,7 @@
   font-weight: bold;
 }
 .chpitemaddress {
-  font-size: calc(5px + 1vw);
+  font-size: calc(5px + 0.75vw);
   color: rgb(22, 29, 111, 0.5);
 }
 .chprequestbutton {

@@ -3,15 +3,17 @@ import React, { useState, useRef, useEffect } from "react";
 import noimage from "./images/noimage.png";
 import "./CharityHomePage.css";
 import userPNG from "./images/user.png";
-import SearchPNG from "./images/search.png";
 import deletePNG from "./images/deletePNG.png";
 import Loading from "./Loading.js";
-import { CitiesList, StatesList } from "./CitiesList";
+import { CitiesList } from "./CitiesList";
 import { getDonorsData } from "./Authentication.js";
 const getItems = async (city) => {
   try {
+    // const response = await fetch(
+    //   `http://localhost:5000/charityGetRequest/${city}`
+    // );
     const response = await fetch(
-      `http://localhost:5000/charityGetRequest/${city}`
+      `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/charityGetRequest/${city}`
     );
     const data = await response.json();
     console.log(data);
@@ -23,7 +25,10 @@ const getItems = async (city) => {
 
 const getPhotos = async (id) => {
   try {
-    const response = await fetch(`http://localhost:5000/getPhoto/${id}`);
+    // const response = await fetch(`http://localhost:5000/getPhoto/${id}`);
+    const response = await fetch(
+      `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/getPhoto/${id}`
+    );
     const data = await response.json();
     return data;
   } catch (e) {
@@ -33,23 +38,41 @@ const getPhotos = async (id) => {
 
 const sendRequestToDonor = async (city, donoruid, doneeuid, productId) => {
   console.log(productId);
-  const response = await fetch(`http://localhost:5000/sendRequest`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ donoruid, doneeuid, city, productId }),
-  });
+  // const response = await fetch(`http://localhost:5000/sendRequest`, {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ donoruid, doneeuid, city, productId }),
+  // });
+  const response = await fetch(
+    `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/sendRequest`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ donoruid, doneeuid, city, productId }),
+    }
+  );
   const data = await response.json();
   console.log(data);
 };
 
 const deleteRequest = async (productinfo) => {
-  const response = await fetch("http://localhost:5000/deleteRequest", {
-    method: "DELETE",
-    body: JSON.stringify(productinfo),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  // const response = await fetch("http://localhost:5000/deleteRequest", {
+  //   method: "DELETE",
+  //   body: JSON.stringify(productinfo),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  const response = await fetch(
+    "https://us-central1-onlinecharitydonations.cloudfunctions.net/app/deleteRequest",
+    {
+      method: "DELETE",
+      body: JSON.stringify(productinfo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   const data = await response.json();
   console.log(data);
   return data;

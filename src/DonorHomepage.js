@@ -4,7 +4,7 @@ import userPNG from "./images/user.png";
 import backPNG from "./images/back.png";
 import Loading from "./Loading.js";
 import { useEffect, useRef, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getDoneeData, getCertificate, getSingleDonee } from "./Authentication";
 import { CitiesList } from "./CitiesList";
 import DonorProfile from "./DonorProfile";
@@ -23,13 +23,20 @@ const uploadItems = async (files, data) => {
     console.log(i);
   }
   try {
-    const response = await fetch("http://localhost:5000/uploadImages", {
-      method: "POST",
-      body: formData,
-      header: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    // const response = await fetch("http://localhost:5000/uploadImages", {
+    //   method: "POST",
+    //   body: formData,
+    //   header: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // });
+    const response = await fetch(
+      "https://us-central1-onlinecharitydonations.cloudfunctions.net/app/uploadImages",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const data = await response.json();
     return data;
   } catch (e) {
@@ -40,8 +47,11 @@ const uploadItems = async (files, data) => {
 
 const getData = async (uid) => {
   try {
+    // const response = await fetch(
+    //   `http://localhost:5000/donorGetRequest/${uid}`
+    // );
     const response = await fetch(
-      `http://localhost:5000/donorGetRequest/${uid}`
+      `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/donorGetRequest/${uid}`
     );
     const data = await response.json();
     console.log(data);
@@ -55,7 +65,10 @@ const getData = async (uid) => {
 
 const getPhotos = async (id) => {
   try {
-    const response = await fetch(`http://localhost:5000/getPhoto/${id}`);
+    // const response = await fetch(`http://localhost:5000/getPhoto/${id}`);
+    const response = await fetch(
+      `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/getPhoto/${id}`
+    );
     const data = await response.json();
     return data;
   } catch (e) {
@@ -64,18 +77,33 @@ const getPhotos = async (id) => {
 };
 const acceptRequest = async (donoruid, doneeuid, productid, city) => {
   console.log(donoruid, doneeuid, productid);
-  const response = await fetch("http://localhost:5000/acceptRequest", {
-    method: "POST",
-    body: JSON.stringify({
-      donoruid,
-      doneeuid,
-      productid,
-      city,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  // const response = await fetch("http://localhost:5000/acceptRequest", {
+  //   method: "POST",
+  //   body: JSON.stringify({
+  //     donoruid,
+  //     doneeuid,
+  //     productid,
+  //     city,
+  //   }),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  const response = await fetch(
+    "https://us-central1-onlinecharitydonations.cloudfunctions.net/app/acceptRequest",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        donoruid,
+        doneeuid,
+        productid,
+        city,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   const data = await response.json();
   console.log(data);
 };
@@ -83,15 +111,26 @@ const acceptRequest = async (donoruid, doneeuid, productid, city) => {
 const deleteItem = async (details) => {
   const { productId, city, uid, photos } = details;
   console.log(details);
-  const response = await fetch("http://localhost:5000/deleteItem", {
-    method: "DELETE",
-    body: JSON.stringify({ productId, city, uid, photos }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  // const response = await fetch("http://localhost:5000/deleteItem", {
+  //   method: "DELETE",
+  //   body: JSON.stringify({ productId, city, uid, photos }),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  const response = await fetch(
+    "https://us-central1-onlinecharitydonations.cloudfunctions.net/app/deleteItem",
+    {
+      method: "DELETE",
+      body: JSON.stringify({ productId, city, uid, photos }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   const data = await response.json();
   console.log(data);
+  return data;
 };
 
 const UserHomepage = () => {
@@ -284,7 +323,8 @@ const SingleProduct = ({ data, uid, setViewProduct, reload, setReload }) => {
               city: data.city,
               uid,
               photos: data.photos,
-            }).then(() => {
+            }).then((response) => {
+              setViewProduct({ booli: false, data: {} });
               setReload(!reload);
             });
           }}
@@ -590,6 +630,7 @@ const Images = ({ photos }) => {
 };
 
 const convertbuff = async (photos) => {
+  console.log(photos);
   const photoarray = [];
   for (let i = 0; i < photos.length; i++) {
     const response = await getPhotos(photos[i]);
@@ -665,6 +706,7 @@ const AddItem = ({ uid, setAddNewItem, count, userInfo }) => {
                   city: cityInput.current.value,
                 };
                 uploadItems(fileInput.current.files, data).then((response) => {
+                  console.log(response);
                   if (response.status) {
                     setAddNewItem({ booli: false, count: count + 1 });
                   } else {
