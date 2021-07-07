@@ -10,12 +10,12 @@ import { getDonorsData } from "./Authentication.js";
 
 const getItems = async (city) => {
   try {
-    const response = await fetch(
-      `http://localhost:5000/charityGetRequest/${city}`
-    );
     // const response = await fetch(
-    //   `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/charityGetRequest/${city}`
+    //   `http://localhost:5000/charityGetRequest/${city}`
     // );
+    const response = await fetch(
+      `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/charityGetRequest/${city}`
+    );
     const data = await response.json();
     console.log(data);
     return data;
@@ -26,10 +26,10 @@ const getItems = async (city) => {
 
 const getPhotos = async (id) => {
   try {
-    const response = await fetch(`http://localhost:5000/getPhoto/${id}`);
-    // const response = await fetch(
-    //   `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/getPhoto/${id}`
-    // );
+    // const response = await fetch(`http://localhost:5000/getPhoto/${id}`);
+    const response = await fetch(
+      `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/getPhoto/${id}`
+    );
     const data = await response.json();
     return data;
   } catch (e) {
