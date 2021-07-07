@@ -31,7 +31,7 @@ function App() {
         <div>
           <h3>Donate almost anything</h3>
           <p>
-            We accept all kinds of donations like Money, Clothes, Stationary ,
+            We accept all kinds of donations like Money, Clothes, Stationary,
             Food, Groceries and much more.
           </p>
         </div>
