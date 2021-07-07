@@ -7,14 +7,15 @@ import deletePNG from "./images/deletePNG.png";
 import Loading from "./Loading.js";
 import { CitiesList } from "./CitiesList";
 import { getDonorsData } from "./Authentication.js";
+
 const getItems = async (city) => {
   try {
-    // const response = await fetch(
-    //   `http://localhost:5000/charityGetRequest/${city}`
-    // );
     const response = await fetch(
-      `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/charityGetRequest/${city}`
+      `http://localhost:5000/charityGetRequest/${city}`
     );
+    // const response = await fetch(
+    //   `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/charityGetRequest/${city}`
+    // );
     const data = await response.json();
     console.log(data);
     return data;
@@ -25,10 +26,10 @@ const getItems = async (city) => {
 
 const getPhotos = async (id) => {
   try {
-    // const response = await fetch(`http://localhost:5000/getPhoto/${id}`);
-    const response = await fetch(
-      `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/getPhoto/${id}`
-    );
+    const response = await fetch(`http://localhost:5000/getPhoto/${id}`);
+    // const response = await fetch(
+    //   `https://us-central1-onlinecharitydonations.cloudfunctions.net/app/getPhoto/${id}`
+    // );
     const data = await response.json();
     return data;
   } catch (e) {
@@ -194,24 +195,19 @@ const ItemsContainer = ({ uid, booli, searchKey }) => {
   console.log(uid);
   useEffect(() => {
     console.count("UseEffect");
-    getItems(searchKey)
-      .then((response) => {
-        if (response.status === 1) {
-          console.log(response.products);
-          const items = segregateItems(response.products, uid);
-          setProducts({
-            status: response.status,
-            requestedProducts: items.req,
-            nonReqProducts: items.noreq,
-            acceptedRequests: items.reqaccepted,
-            loading: false,
-          });
-        }
-      })
-      .catch((e) => {
-        console.log("caught");
-        setProducts({ status: 0, loading: false });
-      });
+    getItems(searchKey).then((response) => {
+      if (response.status === 1) {
+        console.log(response.products);
+        const items = segregateItems(response.products, uid);
+        setProducts({
+          status: response.status,
+          requestedProducts: items.req,
+          nonReqProducts: items.noreq,
+          acceptedRequests: items.reqaccepted,
+          loading: false,
+        });
+      }
+    });
   }, [searchKey, reload, uid]);
   return (
     <div>
@@ -271,9 +267,11 @@ const segregateItems = (data, doneeuid) => {
   console.log(doneeuid);
   data.forEach((donor) => {
     donor.products.forEach((item) => {
+      console.log(item);
       var booli = false;
       if (item.donated.status === false) {
-        item.requests.array.forEach((id) => {
+        console.log(item.requests);
+        item.requests.forEach((id) => {
           if (doneeuid === id.doneeuid) {
             req.push({ uid: donor.uid, item });
             booli = true;
@@ -451,7 +449,6 @@ const AcceptedItems = ({ products }) => {
 const Images = ({ photos }) => {
   const [allimages, setAllImages] = useState({ status: 0, noimage: 0 });
   useEffect(() => {
-    console.log(allimages);
     if (photos.length) {
       setAllImages({ status: 0, noimage: 0 });
       convertbuff(photos).then((response) => {
@@ -460,7 +457,7 @@ const Images = ({ photos }) => {
     } else {
       setAllImages({ status: 1, noimage: 1 });
     }
-  }, [allimages, photos]);
+  }, [photos]);
   return (
     <div className="chpproductimagesdiv">
       {allimages.status ? (
