@@ -195,3 +195,13 @@ export const getDonorsData = async (products) => {
     return { status: 0 };
   }
 };
+
+export const LogoutUser = async () => {
+  try {
+    await firebase.auth().signOut();
+    return { status: 1 };
+  } catch (e) {
+    console.log("SignOut Unsuccessful", e);
+    return { status: 0 };
+  }
+};

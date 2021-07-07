@@ -135,7 +135,7 @@ const deleteItem = async (details) => {
 
 const UserHomepage = () => {
   const location = useLocation();
-  const [userInfo, setUserInfo] = useState(location.state);
+  const userInfo = location.state;
   const [addNewItem, setAddNewItem] = useState({ booli: false, count: 0 });
   const [viewProfile, setViewProfile] = useState(false);
   console.log(userInfo);
@@ -191,7 +191,7 @@ const DonatedItems = ({ uid, count }) => {
       console.log(response);
       setItems(response);
     });
-  }, [count, reload]);
+  }, [count, reload, uid]);
   return (
     <>
       {items.loading ? (
@@ -379,7 +379,7 @@ const SingleDonee = ({ uid }) => {
       console.log(response);
       setDoneeData(response);
     });
-  }, []);
+  }, [uid]);
   return (
     <>
       {viewProfile.status && (
@@ -456,7 +456,7 @@ const Requests = ({
     getDoneeData(requests).then((response) => {
       setReqDonees(response);
     });
-  }, []);
+  }, [requests]);
   return (
     <>
       {viewProfile.status && (
@@ -524,7 +524,7 @@ const DoneeProfile = ({ data, setViewProfile }) => {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [email]);
   return (
     <div className="dhpdoneeprofile">
       <div className="dhpdoneeprofilecontainer">
@@ -539,7 +539,10 @@ const DoneeProfile = ({ data, setViewProfile }) => {
               setViewProfile({ status: false, data: {} });
             }}
           >
-            <img src="https://img.icons8.com/ios/100/000000/multiply.png" />
+            <img
+              src="https://img.icons8.com/ios/100/000000/multiply.png"
+              alt="close"
+            />
           </div>
         </div>
         <div className="dhpdoneebody">

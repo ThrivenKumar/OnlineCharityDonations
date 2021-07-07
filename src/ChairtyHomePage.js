@@ -80,7 +80,7 @@ const deleteRequest = async (productinfo) => {
 
 const CharityHomePage = () => {
   const location = useLocation();
-  const [userInfo, setUserInfo] = useState(location.state);
+  const userInfo = location.state;
   const [searchKey, setSearchKey] = useState(userInfo.city);
   const [warning, setWarning] = useState(false);
   const searchCity = useRef(null);
@@ -212,7 +212,7 @@ const ItemsContainer = ({ uid, booli, searchKey }) => {
         console.log("caught");
         setProducts({ status: 0, loading: false });
       });
-  }, [searchKey, reload]);
+  }, [searchKey, reload, uid]);
   return (
     <div>
       {products.loading ? (
@@ -269,11 +269,11 @@ const segregateItems = (data, doneeuid) => {
   const reqaccepted = [];
   const noreq = [];
   console.log(doneeuid);
-  data.map((donor) => {
-    donor.products.map((item) => {
+  data.forEach((donor) => {
+    donor.products.forEach((item) => {
       var booli = false;
       if (item.donated.status === false) {
-        item.requests.map((id) => {
+        item.requests.array.forEach((id) => {
           if (doneeuid === id.doneeuid) {
             req.push({ uid: donor.uid, item });
             booli = true;
@@ -382,7 +382,7 @@ const AcceptedItems = ({ products }) => {
       setDonorsData(response);
       console.log(response);
     });
-  }, []);
+  }, [products]);
   return (
     <>
       {products.length > 0 && (
@@ -460,7 +460,7 @@ const Images = ({ photos }) => {
     } else {
       setAllImages({ status: 1, noimage: 1 });
     }
-  }, []);
+  }, [allimages, photos]);
   return (
     <div className="chpproductimagesdiv">
       {allimages.status ? (
