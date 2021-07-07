@@ -55,7 +55,7 @@ const DonorProfile = ({ data, setViewProfile }) => {
                 <div className="dpprofilevalue">{data.email}</div>
               </div>
             </div>
-            <div className="dplogout">
+            <div className="chplogout">
               {redirect.warning && <p>Error!! Try again</p>}
               <button
                 onClick={() => {

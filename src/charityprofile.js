@@ -170,7 +170,7 @@ const CharityProfile = () => {
               </button>
             </div>
           ) : (
-            <div>
+            <div className="cplogout">
               {redirect.warning && <p>Error!! Try again</p>}
               <button
                 onClick={() => {

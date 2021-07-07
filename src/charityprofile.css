@@ -33,7 +33,6 @@
 }
 .cpmaindiv {
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -133,4 +132,27 @@
 .cpcertificate {
   width: 100%;
   border-radius: 1vw;
+}
+
+.cplogout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+.cplogout button {
+  height: calc(10px + 2vw);
+  padding-left: 1vw;
+  padding-right: 1vw;
+  outline: none;
+  border: none;
+  background-color: rgb(22, 29, 111);
+  color: rgb(152, 222, 217);
+  font-size: calc(5px + 0.75vw);
+  font-weight: bold;
+}
+.cplogout button:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
