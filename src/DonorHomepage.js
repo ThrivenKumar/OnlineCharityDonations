@@ -330,8 +330,8 @@ const SingleProduct = ({ data, uid, setViewProduct, reload, setReload }) => {
                 photos: data.photos,
               }).then((response) => {
                 if (response.count > 0) {
-                  setViewProduct({ booli: false, data: {} });
                   setReload(!reload);
+                  setViewProduct({ booli: false, data: {} });
                 } else {
                   setLoading(false);
                 }
