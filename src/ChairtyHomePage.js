@@ -150,7 +150,7 @@ const CharityHomePage = () => {
           </div>
           <div className="chptitleright">
             <div className="chpsearchcity">
-              <p>City: </p>
+              <p>City :</p>
               <select
                 className="chpsearchbar"
                 ref={searchCity}
@@ -468,6 +468,10 @@ const Images = ({ photos }) => {
               alt="ProductImage"
               key={index}
               className="chpproductimg"
+              onClick={() => {
+                var newTab = window.open();
+                newTab.document.body.innerHTML = `<img src=${`data:image/png;base64,${photo}`} height="100%">`;
+              }}
             />
           );
         })

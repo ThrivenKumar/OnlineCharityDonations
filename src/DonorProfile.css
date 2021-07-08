@@ -28,7 +28,7 @@
 }
 .dpdonorname {
   font-size: calc(7px + 1vw);
-  color: rgb(4, 0, 154);
+  color: #04009a;
 }
 .dpheadersmall {
   display: flex;
@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 .dpheadersmall img {
-  height: calc(20px + 1vw);
+  height: calc(10px + 1vw);
 }
 .dpback {
   height: 50%;
@@ -89,7 +89,7 @@
   padding: 1vw;
 }
 .dplogout button {
-  height: calc(10px + 2vw);
+  height: calc(5px + 2vw);
   padding-left: 1vw;
   padding-right: 1vw;
   outline: none;

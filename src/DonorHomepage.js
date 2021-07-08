@@ -2,13 +2,13 @@ import "./DonorHomepage.css";
 import noimage from "./images/noimage.png";
 import userPNG from "./images/user.png";
 import backPNG from "./images/back.png";
+import closePNG from "./images/closePNG.png";
 import Loading from "./Loading.js";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getDoneeData, getCertificate, getSingleDonee } from "./Authentication";
 import { CitiesList } from "./CitiesList";
 import DonorProfile from "./DonorProfile";
-
 const uploadItems = async (files, data) => {
   console.log(data);
   const formData = new FormData();
@@ -277,6 +277,7 @@ const Items = ({ items, uid, reload, setReload }) => {
 
 const SingleProduct = ({ data, uid, setViewProduct, reload, setReload }) => {
   const { productName, photos, address } = data;
+  const [loading, setLoading] = useState(false);
   return (
     <div className="dhpsingleitem">
       <div className="dhpsingleitemheader">
@@ -315,23 +316,32 @@ const SingleProduct = ({ data, uid, setViewProduct, reload, setReload }) => {
           />
         </div>
       </div>
-      <div className="dhpdeleteitem">
-        <button
-          onClick={() => {
-            deleteItem({
-              productId: data.productId,
-              city: data.city,
-              uid,
-              photos: data.photos,
-            }).then((response) => {
-              setViewProduct({ booli: false, data: {} });
-              setReload(!reload);
-            });
-          }}
-        >
-          Delete Item
-        </button>
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="dhpdeleteitem">
+          <button
+            onClick={() => {
+              setLoading(true);
+              deleteItem({
+                productId: data.productId,
+                city: data.city,
+                uid,
+                photos: data.photos,
+              }).then((response) => {
+                if (response.count > 0) {
+                  setViewProduct({ booli: false, data: {} });
+                  setReload(!reload);
+                } else {
+                  setLoading(false);
+                }
+              });
+            }}
+          >
+            Delete Item
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -471,7 +481,7 @@ const Requests = ({
               console.log(donee);
               return (
                 <div key={index} className="dhpsinglerequest">
-                  <div>
+                  <div className="dhpsingledoneename">
                     <p>{donee.username}</p>
                   </div>
                   <div className="dhpsingledoneeoptions">
@@ -539,10 +549,7 @@ const DoneeProfile = ({ data, setViewProfile }) => {
               setViewProfile({ status: false, data: {} });
             }}
           >
-            <img
-              src="https://img.icons8.com/ios/100/000000/multiply.png"
-              alt="close"
-            />
+            <img src={closePNG} alt="close" />
           </div>
         </div>
         <div className="dhpdoneebody">
@@ -656,6 +663,7 @@ const AddItem = ({ uid, setAddNewItem, count, userInfo }) => {
   const fileInput = useRef(null);
   const [images, setImages] = useState({ status: false, files: [] });
   const [status, setStatus] = useState({ booli: false, msg: "" });
+  const [reload, setReload] = useState(false);
   return (
     <div className="dhpnewitemdiv">
       <form className="dhpproductdetails">
@@ -692,58 +700,66 @@ const AddItem = ({ uid, setAddNewItem, count, userInfo }) => {
         <div className="dhpnewitemstatus">
           <p>{status.msg}</p>
         </div>
-        <div className="dhpnewitemfooter">
-          <button
-            type="button"
-            onClick={() => {
-              if (
-                productNameInput.current.value !== "" &&
-                addressInput.current.value !== "" &&
-                cityInput.current.value !== "" &&
-                images.files.length !== 0
-              ) {
-                const data = {
-                  uid,
-                  productName: productNameInput.current.value,
-                  address: addressInput.current.value,
-                  city: cityInput.current.value,
-                };
-                uploadItems(fileInput.current.files, data).then((response) => {
-                  console.log(response);
-                  if (response.status) {
-                    setAddNewItem({ booli: false, count: count + 1 });
-                  } else {
-                    setStatus({ booli: true, msg: response.msg });
-                  }
-                });
-              } else {
-                setStatus({ booli: true, msg: "Please enter all details" });
-              }
-            }}
-          >
-            Add Item
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              productNameInput.current.value = "";
-              addressInput.current.value = "";
-              cityInput.current.value = "";
-              setImages({ status: false, files: [] });
-              setStatus({ booli: false, msg: "" });
-            }}
-          >
-            Reset
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setAddNewItem({ booli: false, count: count });
-            }}
-          >
-            Cancel
-          </button>
-        </div>
+
+        {reload ? (
+          <Loading />
+        ) : (
+          <div className="dhpnewitemfooter">
+            <button
+              type="button"
+              onClick={() => {
+                if (
+                  productNameInput.current.value !== "" &&
+                  addressInput.current.value !== "" &&
+                  cityInput.current.value !== "" &&
+                  images.files.length !== 0
+                ) {
+                  setReload(true);
+                  const data = {
+                    uid,
+                    productName: productNameInput.current.value,
+                    address: addressInput.current.value,
+                    city: cityInput.current.value,
+                  };
+                  uploadItems(fileInput.current.files, data).then(
+                    (response) => {
+                      console.log(response);
+                      if (response.status) {
+                        setAddNewItem({ booli: false, count: count + 1 });
+                      } else {
+                        setStatus({ booli: true, msg: response.msg });
+                      }
+                    }
+                  );
+                } else {
+                  setStatus({ booli: true, msg: "Please enter all details" });
+                }
+              }}
+            >
+              Add Item
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                productNameInput.current.value = "";
+                addressInput.current.value = "";
+                cityInput.current.value = "";
+                setImages({ status: false, files: [] });
+                setStatus({ booli: false, msg: "" });
+              }}
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setAddNewItem({ booli: false, count: count });
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );
