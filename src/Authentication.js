@@ -55,10 +55,10 @@ export const CharityRegister = async (prop, file, photos) => {
     }
     console.log(response);
     // const anotherRef = storageRef.child(`/cetificates/${prop.fileName}`);
-    return { status: true, uid: userId };
+    return { status: 1, uid: userId };
   } catch (e) {
     console.log(e);
-    return { status: false, code: e.code };
+    return { status: 0, code: e.code };
   }
 };
 

@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { CharityRegister } from "./Authentication.js";
 import { Redirect } from "react-router-dom";
 import { StatesList, CitiesList } from "./CitiesList";
+import Loading from "./Loading.js";
 
 const readFilesPromise = (prop) => {
   const reader = new FileReader();
@@ -52,7 +53,7 @@ const Register = async (prop, file, photos) => {
         const response = await CharityRegister(prop, file, photos);
         console.log(response);
         if (response.status === 1) {
-          return { status: 1 };
+          return response;
         }
         return { status: 0, msg: response.code };
       } catch (e) {
@@ -78,6 +79,7 @@ const CharityRegistration = () => {
   const [status, setStatus] = useState("");
   const [redirect, setRedirect] = useState({ status: false });
   const [selectedState, setSelectedState] = useState("");
+  const [loading, setLoading] = useState(false);
   const inpFile = useRef(null);
   const otherphotos = useRef(null);
   const name = useRef(null);
@@ -264,37 +266,42 @@ const CharityRegistration = () => {
               )}
             </div>
           </div>
-          <div className="crregister">
-            <p className="crstatus">{status}</p>
-            <button
-              onClick={() => {
-                Register(
-                  {
-                    name: name.current.value,
-                    addressLine1: addressLine1.current.value,
-                    addressLine2: addressLine2.current.value,
-                    city: city.current.value,
-                    state: state.current.value,
-                    phoneNo: phoneNo.current.value,
-                    email: email.current.value,
-                    password: password.current.value,
-                    reEnterPassword: reEnterPassword.current.value,
-                  },
-                  certificate.file,
-                  photos.file
-                ).then((iferror) => {
-                  console.log(iferror);
-                  if (iferror.status === false) {
-                    setStatus(iferror.msg);
-                  } else {
-                    setRedirect(iferror);
-                  }
-                });
-              }}
-            >
-              Upload and Register
-            </button>
-          </div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className="crregister">
+              <p className="crstatus">{status}</p>
+              <button
+                onClick={() => {
+                  setLoading(true);
+                  Register(
+                    {
+                      name: name.current.value,
+                      addressLine1: addressLine1.current.value,
+                      addressLine2: addressLine2.current.value,
+                      city: city.current.value,
+                      state: state.current.value,
+                      phoneNo: phoneNo.current.value,
+                      email: email.current.value,
+                      password: password.current.value,
+                      reEnterPassword: reEnterPassword.current.value,
+                    },
+                    certificate.file,
+                    photos.file
+                  ).then((iferror) => {
+                    console.log(iferror);
+                    if (iferror.status === 0) {
+                      setStatus(iferror.msg);
+                    } else {
+                      setRedirect(iferror);
+                    }
+                  });
+                }}
+              >
+                Upload and Register
+              </button>
+            </div>
+          )}
         </div>
       )}
     </>
