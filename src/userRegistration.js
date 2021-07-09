@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import "./userRegistration.css";
 import { DonorRegistration } from "./Authentication.js";
 import { StatesList, CitiesList } from "./CitiesList";
+import Loading from "./Loading.js";
 
 const Register = async (prop) => {
   const {
@@ -54,6 +55,7 @@ const UserRegistration = () => {
   const [status, setStatus] = useState("");
   const [redirect, setRedirect] = useState({ status: false, uid: null });
   const [selectedState, setSelectedState] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -142,33 +144,40 @@ const UserRegistration = () => {
                 ref={reEnterPassword}
               />
             </form>
-            <div className="crregister">
-              <p className="crstatus">{status}</p>
-              <button
-                onClick={() => {
-                  Register({
-                    name: name.current.value,
-                    addressLine1: addressLine1.current.value,
-                    addressLine2: addressLine2.current.value,
-                    state: state.current.value,
-                    city: city.current.value,
-                    phoneNo: phoneNo.current.value,
-                    email: email.current.value,
-                    password: password.current.value,
-                    reEnterPassword: reEnterPassword.current.value,
-                  }).then((response) => {
-                    console.log(response);
-                    if (response.status === 0) {
-                      setStatus(response.msg);
-                    } else if (response.status === 1) {
-                      setRedirect({ status: true, uid: response.uid });
-                    }
-                  });
-                }}
-              >
-                Register
-              </button>
-            </div>
+            {loading ? (
+              <div className="crloading">
+                <Loading />
+              </div>
+            ) : (
+              <div className="crregister">
+                <p className="crstatus">{status}</p>
+                <button
+                  onClick={() => {
+                    setLoading(true);
+                    Register({
+                      name: name.current.value,
+                      addressLine1: addressLine1.current.value,
+                      addressLine2: addressLine2.current.value,
+                      state: state.current.value,
+                      city: city.current.value,
+                      phoneNo: phoneNo.current.value,
+                      email: email.current.value,
+                      password: password.current.value,
+                      reEnterPassword: reEnterPassword.current.value,
+                    }).then((response) => {
+                      console.log(response);
+                      if (response.status === 0) {
+                        setStatus(response.msg);
+                      } else if (response.status === 1) {
+                        setRedirect({ status: true, uid: response.uid });
+                      }
+                    });
+                  }}
+                >
+                  Register
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

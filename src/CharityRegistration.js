@@ -267,7 +267,9 @@ const CharityRegistration = () => {
             </div>
           </div>
           {loading ? (
-            <Loading />
+            <div className="crloading">
+              <Loading />
+            </div>
           ) : (
             <div className="crregister">
               <p className="crstatus">{status}</p>

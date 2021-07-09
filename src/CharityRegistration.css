@@ -194,6 +194,13 @@ select::-ms-expand {
   color: rgb(239, 79, 79);
   font-size: calc(10px + 0.5vw);
 }
+.crloading {
+  padding: 2vw;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @media screen and (max-width: 650px) {
   .crdetails {
     display: block;

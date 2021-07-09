@@ -527,6 +527,7 @@
   height: 100%;
   width: 100%;
   overflow: scroll;
+  gap: calc(10px + 2vw);
 }
 .dhpdoneecertificate img {
   width: 100%;

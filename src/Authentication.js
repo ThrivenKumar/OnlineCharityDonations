@@ -90,10 +90,20 @@ export const charityLogin = async (email, password) => {
 
 export const getCertificate = async (email) => {
   try {
+    const urls = [];
     const certificateURL = await storageRef
       .child(`certificates/${email}`)
       .getDownloadURL();
-    return { status: true, url: certificateURL };
+    urls.push(certificateURL);
+    const otherPhotosRef = await storageRef.child(`photos/${email}`);
+    const otherPhotosURL = await otherPhotosRef.listAll();
+    const len = otherPhotosURL.items.length;
+    for (let i = 0; i < len; i++) {
+      const photourl = await otherPhotosURL.items[i].getDownloadURL();
+      urls.push(photourl);
+    }
+    console.log(urls);
+    return { status: true, urls };
   } catch (e) {
     console.log(e);
     return { status: false, msg: "Failed to load image" };

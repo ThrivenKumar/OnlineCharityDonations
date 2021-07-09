@@ -525,7 +525,7 @@ const Requests = ({
 
 const DoneeProfile = ({ data, setViewProfile }) => {
   const { email, address_1, city, phoneNumber, state, username } = data.donee;
-  const [certificate, setCertificate] = useState({ status: false, url: "" });
+  const [certificate, setCertificate] = useState({ status: false, urls: [] });
   useEffect(() => {
     getCertificate(email)
       .then((response) => {
@@ -587,7 +587,9 @@ const DoneeProfile = ({ data, setViewProfile }) => {
             </div>
             <div className="dhpdoneecertificate">
               {certificate.status ? (
-                <img src={certificate.url} alt="certificate" />
+                certificate.urls.map((url) => {
+                  return <img src={url} alt="certificate" />;
+                })
               ) : (
                 <Loading />
               )}

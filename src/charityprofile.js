@@ -6,7 +6,7 @@ import Loading from "./Loading.js";
 
 const CharityProfile = () => {
   const location = useLocation();
-  const [certificate, setCertificate] = useState({ status: false, url: "" });
+  const [certificate, setCertificate] = useState({ status: false, urls: [] });
   const [clipboard, setclipboard] = useState({
     phone: { border: "2px solid rgb(22, 29, 111)" },
     email: { border: "2px solid rgb(22, 29, 111)" },
@@ -130,13 +130,19 @@ const CharityProfile = () => {
                 </div>
               </div>
             </div>
-            <div className="viewphotos">
+            <div className="cpviewphotos">
               {certificate.status ? (
-                <img
-                  src={certificate.url}
-                  alt="certificate"
-                  className="cpcertificate"
-                />
+                certificate.urls.map((url, index) => {
+                  console.log(url);
+                  return (
+                    <img
+                      src={url}
+                      alt="certificate"
+                      className="cpcertificate"
+                      key={index}
+                    />
+                  );
+                })
               ) : (
                 <Loading />
               )}
