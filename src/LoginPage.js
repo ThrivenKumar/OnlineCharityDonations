@@ -1,7 +1,7 @@
 import "./LoginPage.css";
 import { useRef, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { charityLogin } from "./Authentication.js";
+import { charityLogin, forgotPassword } from "./Authentication.js";
 import Loading from "./Loading.js";
 const LoginPage = () => {
   const email = useRef(null);
@@ -10,6 +10,7 @@ const LoginPage = () => {
     status: false,
     loading: false,
     msg: "",
+    forgot: false,
   });
   return (
     <>
@@ -21,28 +22,92 @@ const LoginPage = () => {
             L<span className="evenletter">o</span>g
             <span className="evenletter">i</span>n
           </div>
-          <div className="Loginsubdiv">
-            <label className="lplabel">Email</label>
-            <input type="email" className="lpinput" ref={email} />
-            <label className="lplabel">Password</label>
-            <input type="password" className="lpinput" ref={password} />
-            <div className="lpstatus">
-              <p>{LoginStatus.msg}</p>
+          {LoginStatus.forgot ? (
+            <div className="Loginsubdiv">
+              <label className="lplabel">
+                Enter email to send password reset mail
+              </label>
+              <input type="email" className="lpinput" ref={email} />
+              <div className="lpstatus">
+                <p>{LoginStatus.msg}</p>
+              </div>
+              <div className="lploginbutton">
+                <button
+                  onClick={() => {
+                    if (email.current.value !== "") {
+                      forgotPassword(email.current.value).then((response) => {
+                        console.log(response);
+                        if (response.status) {
+                          setLoginStatus({
+                            status: false,
+                            loading: false,
+                            msg: "",
+                            forgot: false,
+                          });
+                        } else {
+                          setLoginStatus({
+                            status: false,
+                            loading: false,
+                            msg: response.msg,
+                            forgot: true,
+                          });
+                        }
+                      });
+                    }
+                  }}
+                >
+                  Send
+                </button>
+              </div>
             </div>
-            <div
-              className="lploginbutton"
-              onClick={() => {
-                charityLogin(email.current.value, password.current.value).then(
-                  (response) => {
-                    setLoginStatus(response);
-                  }
-                );
-                setLoginStatus({ status: false, loading: true, msg: "" });
-              }}
-            >
-              {LoginStatus.loading ? <Loading /> : <button>Login</button>}
+          ) : (
+            <div className="Loginsubdiv">
+              <label className="lplabel">E-mail</label>
+              <input type="email" className="lpinput" ref={email} />
+              <label className="lplabel">Password</label>
+              <input type="password" className="lpinput" ref={password} />
+              <div className="lpstatus">
+                <p>{LoginStatus.msg}</p>
+              </div>
+              <div className="lploginbutton">
+                {LoginStatus.loading ? (
+                  <Loading />
+                ) : (
+                  <>
+                    <button
+                      onClick={() => {
+                        charityLogin(
+                          email.current.value,
+                          password.current.value
+                        ).then((response) => {
+                          setLoginStatus(response);
+                        });
+                        setLoginStatus({
+                          status: false,
+                          loading: true,
+                          msg: "",
+                        });
+                      }}
+                    >
+                      Login
+                    </button>
+                    <p
+                      onClick={() => {
+                        setLoginStatus({
+                          status: false,
+                          loading: false,
+                          msg: "",
+                          forgot: true,
+                        });
+                      }}
+                    >
+                      Forgot Password?
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </>

@@ -316,59 +316,90 @@ const Items = ({
             {products.map((singleitem, index) => {
               const { item, uid } = singleitem;
               return (
-                <div className="chpitem" key={index}>
-                  <Images photos={item.photos} />
-                  <div className="chpitemfooter">
-                    <div className="chpitemdetails">
-                      <p className="chpitemname">{item.productName}</p>
-                      <p className="chpitemaddress">{item.address}</p>
-                    </div>
-                    {booli ? (
-                      <button
-                        className="chprequestbutton"
-                        onClick={() => {
-                          sendRequestToDonor(
-                            city,
-                            uid,
-                            doneeuid,
-                            item.productId
-                          ).then(() => {
-                            console.log(!reload);
-                            setReload(!reload);
-                          });
-                        }}
-                      >
-                        Request
-                      </button>
-                    ) : (
-                      <div
-                        className="chpdelreqbtn"
-                        onClick={() => {
-                          const data = {
-                            uid,
-                            doneeuid,
-                            productid: item.productId,
-                            city: item.city,
-                          };
-                          deleteRequest(data).then((response) => {
-                            if (response.status) {
-                              setReload(!reload);
-                            }
-                          });
-                        }}
-                      >
-                        <img src={deletePNG} alt="delete" />
-                        <p>Request</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <Item
+                  item={item}
+                  uid={uid}
+                  index={index}
+                  booli={booli}
+                  city={city}
+                  setReload={setReload}
+                  reload={reload}
+                  doneeuid={doneeuid}
+                />
               );
             })}
           </div>
         </>
       )}
     </>
+  );
+};
+
+const Item = ({
+  item,
+  uid,
+  index,
+  booli,
+  setReload,
+  reload,
+  city,
+  doneeuid,
+}) => {
+  const [loading, setLoading] = useState(false);
+
+  return (
+    <div className="chpitem" key={index}>
+      <Images photos={item.photos} />
+      <div className="chpitemfooter">
+        <div className="chpitemdetails">
+          <p className="chpitemname">{item.productName}</p>
+          <p className="chpitemaddress">{item.address}</p>
+        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            {booli ? (
+              <button
+                className="chprequestbutton"
+                onClick={() => {
+                  setLoading(true);
+                  sendRequestToDonor(city, uid, doneeuid, item.productId).then(
+                    () => {
+                      console.log(!reload);
+                      setReload(!reload);
+                    }
+                  );
+                }}
+              >
+                Request
+              </button>
+            ) : (
+              <div
+                className="chpdelreqbtn"
+                onClick={() => {
+                  setLoading(true);
+                  const data = {
+                    uid,
+                    doneeuid,
+                    productid: item.productId,
+                    city: item.city,
+                  };
+                  deleteRequest(data).then((response) => {
+                    if (response.status) {
+                      setReload(!reload);
+                    }
+                  });
+                }}
+              >
+                <img src={deletePNG} alt="delete" />
+                <p>Request</p>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 

@@ -212,6 +212,7 @@ const CharityRegistration = () => {
                     type="file"
                     hidden="hidden"
                     ref={inpFile}
+                    accept="image/png, image/jpeg, image/jpg"
                     onChange={() => {
                       console.log(inpFile.current.files);
                       FileURL(inpFile.current.files).then((response) => {
@@ -245,6 +246,7 @@ const CharityRegistration = () => {
                     name="photos"
                     hidden="hidden"
                     ref={otherphotos}
+                    accept="image/png, image/jpeg, image/jpg"
                     multiple
                     onChange={(e) => {
                       FileURL(otherphotos.current.files).then((result) =>

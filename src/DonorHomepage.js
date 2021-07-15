@@ -683,6 +683,7 @@ const AddItem = ({ uid, setAddNewItem, count, userInfo }) => {
           type="file"
           hidden
           ref={fileInput}
+          accept="image/png, image/jpeg, image/jpg"
           multiple
           onChange={(e) => {
             FileUrl(e.target.files, images.files).then((response) => {

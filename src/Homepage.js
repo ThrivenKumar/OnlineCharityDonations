@@ -45,15 +45,15 @@ function App() {
           />
         </div>
         <div className="subauthentication">
-          <div className="charitydiv">
-            <h3>Hello Donee !</h3>
-            <Link to="/charityregistration">
-              <button>Register here.</button>
-            </Link>
-          </div>
           <div className="donordiv">
             <h3>Hello Donor !</h3>
             <Link to="/userregistration">
+              <button>Register here.</button>
+            </Link>
+          </div>
+          <div className="charitydiv">
+            <h3>Hello Donee !</h3>
+            <Link to="/charityregistration">
               <button>Register here.</button>
             </Link>
           </div>

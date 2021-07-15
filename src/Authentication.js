@@ -215,3 +215,13 @@ export const LogoutUser = async () => {
     return { status: 0 };
   }
 };
+
+export const forgotPassword = async (email) => {
+  try {
+    const response = await firebase.auth().sendPasswordResetEmail(email);
+    console.log(response);
+    return { status: true, msg: "mail sent", response };
+  } catch (e) {
+    return { status: false, msg: e.code };
+  }
+};
