@@ -16,6 +16,7 @@ const Register = async (prop) => {
     password,
     reEnterPassword,
   } = prop;
+  console.log(prop);
   if (
     name !== "" &&
     addressLine1 !== "" &&
@@ -167,6 +168,7 @@ const UserRegistration = () => {
                     }).then((response) => {
                       console.log(response);
                       if (response.status === 0) {
+                        setLoading(false);
                         setStatus(response.msg);
                       } else if (response.status === 1) {
                         setRedirect({ status: true, uid: response.uid });

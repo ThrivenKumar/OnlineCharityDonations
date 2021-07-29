@@ -182,13 +182,14 @@
 }
 .dhpstartdonating div {
   width: 98%;
-  background-color: rgb(22, 29, 111);
-  color: white;
+  color: rgb(22, 29, 111);
   padding: 2vw;
+  display: flex;
+  justify-content: center;
   /* border-radius: 1vw; */
 }
 .dhpstartdonating div h3 {
-  font-size: calc(10px + 2vw);
+  font-size: calc(50px + 3vw);
 }
 .dhpdonateditems {
   width: 100%;

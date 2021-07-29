@@ -121,6 +121,7 @@ export const DonorRegistration = async (prop) => {
     email,
     password,
   } = prop;
+  console.log(prop);
   try {
     const user = await firebase
       .auth()

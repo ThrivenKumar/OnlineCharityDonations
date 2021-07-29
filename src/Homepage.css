@@ -65,8 +65,8 @@
   align-items: top;
 }
 .intro img {
-  width: 50%;
   height: calc(300px + 10vw);
+  max-width: 50%;
 }
 .intro div {
   width: 50%;
